@@ -14,8 +14,10 @@ import org.hibernate.validator.constraints.URL;
  */
 public class Project extends Validatable {
     
-    @NotBlank
-    private String name;
+
+    private String firstname;
+    
+    private String lastName;
     
     @NotBlank
     private String description;
@@ -30,14 +32,6 @@ public class Project extends Validatable {
     private Float rating;
     private String tags;
     
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -78,13 +72,25 @@ public class Project extends Validatable {
     public String getTags() {
         return tags;
     }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
     
     
     
-    
-    
-    
-    
-    
+            
     
 }
