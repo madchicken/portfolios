@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `portfolios` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `portfolios`;
+CREATE DATABASE  IF NOT EXISTS `portfolios` /*!40100 DEFAULT CHARACTER SET latin1 */;
 -- MySQL dump 10.13  Distrib 5.5.16, for osx10.5 (i386)
 --
 -- Host: 127.0.0.1    Database: portfolios
