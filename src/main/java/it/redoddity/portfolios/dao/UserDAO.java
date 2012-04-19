@@ -5,6 +5,7 @@
 package it.redoddity.portfolios.dao;
 
 import it.redoddity.dao.BaseDAO;
+import it.redoddity.portfolios.model.Project;
 import it.redoddity.portfolios.model.User;
 import it.redoddity.utils.DatabaseConnectionInfo;
 import java.sql.SQLException;
@@ -32,6 +33,7 @@ public class UserDAO extends BaseDAO {
     public UserDAO(DatabaseConnectionInfo info) {
         super(User.class, info);
         init(TABLE_FIELDS);
+        Project.userDAO = this;
     }
     
     public User findById(String id) {

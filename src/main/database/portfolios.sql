@@ -32,6 +32,9 @@ CREATE TABLE `project` (
   `tags` varchar(1000) DEFAULT NULL,
   `url` varchar(512) DEFAULT NULL,
   `thumbnailUrl` varchar(512) DEFAULT NULL,
+  `createdAt` date DEFAULT NULL,
+  `updatedAt` date DEFAULT NULL,
+  `leaderId` varchar(36) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -60,6 +63,8 @@ CREATE TABLE `user` (
   `lastName` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL COMMENT '	',
   `password` varchar(45) NOT NULL,
+  `createdAt` date DEFAULT NULL,
+  `updatedAt` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -123,6 +128,8 @@ CREATE TABLE `vote` (
   `user_id` varchar(36) NOT NULL,
   `project_id` varchar(36) NOT NULL COMMENT '	',
   `value` int(11) NOT NULL,
+  `createdAt` date DEFAULT NULL,
+  `updatedAt` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_vote_user` (`user_id`),
   KEY `fk_vote_project` (`project_id`),

@@ -43,9 +43,9 @@ public class FixturesCreator {
                 User user = new User();
                 user.setEmail("test@redoddity.it");
                 user.setPassword("password");
-
+                
                 userDAO.create(user);
-                Project project = new Project();
+                Project project = new Project(user);
                 project.setName("Prima prova");
                 project.setRating(5f);
                 project.setTags("java, html");
@@ -58,11 +58,16 @@ public class FixturesCreator {
                         + "euismod id. Duis scelerisque arcu id risus scelerisque "
                         + "vitae adipiscing dolor eleifend. Donec volutpat venenatis "
                         + "diam a vulputate. Aliquam elementum interdum nisl ac cursus.");
-                projectDAO.create(project, user);
+                projectDAO.create(project);
+                user.setEmail("test2@redoddity.it");
+                user.setPassword("password");
+                userDAO.create(user);
+                project.addCollaborator(user);
 
             }
         } catch (SQLException ex) {
             Logger.getLogger(FixturesCreator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

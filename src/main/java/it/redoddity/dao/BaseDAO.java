@@ -8,6 +8,7 @@ import it.redoddity.model.Model;
 import it.redoddity.utils.DatabaseConnectionInfo;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 import org.apache.commons.beanutils.PropertyUtils;
 
@@ -145,6 +146,8 @@ public abstract class BaseDAO {
     public void create(Model model) throws SQLException {
         UUID uuid = UUID.randomUUID();
         model.setId(uuid.toString());
+        model.setCreatedAt(new Date(System.currentTimeMillis()));
+        model.setUpdatedAt(model.getCreatedAt());
         String tableName = getTableName();
         List<String> propertyNames = guessPropertyNames(tableName);
 
