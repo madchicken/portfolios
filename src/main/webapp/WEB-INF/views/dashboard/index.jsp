@@ -10,7 +10,7 @@
             <h1>
                 Dashboard
                 <small>Here you'll find your own projects</small>
-                <a class="btn btn-primary" href="${root}/project/create">Add Project</a>
+                <a class="btn btn-primary" href="${root}/project/newproject">Add Project</a>
             </h1>
         </div>
         <c:forEach items="${ownProjects}" var="ownProject">

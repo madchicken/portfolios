@@ -29,18 +29,21 @@ public class ProjectController extends ApplicationController{
         this.projectDAO = projectDAO;
     }
     
-    public void create() throws ServletException, IOException {
-        render("create");
+    public void newproject() throws ServletException, IOException {
+        render("new");
     }
     
-    public void save() throws SQLException {
-        User user = new User();
-        user.setId("a821b1ce-aa73-4ce1-845c-6f4b4b34407a");
-        user.setEmail("test@redoddity.it");
-        
-        Project project = new Project();
+    public void create() throws SQLException, ServletException, IOException {
+        User user = getCurrentUser();
+        Project project = new Project(user);
         project.bind(request.getParameterMap(), validator);
-        projectDAO.create(project, user);
+        if (project.isValid()) {
+            projectDAO.create(project);
+            redirect("dashboard");
+        } else {
+            request.setAttribute("project", project);
+            render("new");
+        }
     }
     
 }

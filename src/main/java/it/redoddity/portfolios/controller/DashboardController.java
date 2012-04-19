@@ -6,6 +6,7 @@ package it.redoddity.portfolios.controller;
 
 import it.redoddity.portfolios.dao.ProjectDAO;
 import it.redoddity.portfolios.model.Project;
+import it.redoddity.portfolios.model.User;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -30,8 +31,8 @@ public class DashboardController extends ApplicationController{
     
     @Override
     public void index() throws ServletException, IOException {
-        //User user = getCurrentUser();
-        List<Project> ownProjects = projectDAO.findById("a821b1ce-aa73-4ce1-845c-6f4b4b34407a");
+        User user = getCurrentUser();
+        List<Project> ownProjects = projectDAO.findUserProjects(user);
         request.setAttribute("ownProjects", ownProjects);
         render("index");
     }
