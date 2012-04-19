@@ -20,18 +20,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDAO extends BaseDAO {
 
-    private static final String[] TABLE_FIELDS = {
-        "id VARCHAR( 36 ) NOT NULL PRIMARY KEY",
-        "name VARCHAR( 256 ) NOT NULL",
-        "email VARCHAR( 256 ) NOT NULL",
-        "password VARCHAR( 256 ) NOT NULL",
-        "loginAt TIMESTAMP NULL",
-    };
+   
 
     @Autowired
     public UserDAO(DatabaseConnectionInfo info) {
         super(User.class, info);
-        init(TABLE_FIELDS);
+      
     }
     
     public User findById(String id) {

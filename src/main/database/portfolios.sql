@@ -58,6 +58,7 @@ CREATE TABLE `user` (
   `id` varchar(36) NOT NULL,
   `firstName` varchar(45) DEFAULT NULL,
   `lastName` varchar(45) DEFAULT NULL,
+   `nickName` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL COMMENT '	',
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)

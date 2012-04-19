@@ -15,7 +15,7 @@ import org.apache.commons.beanutils.PropertyUtils;
  *
  * @author alessandro
  */
-public abstract class BaseDAO {
+public abstract class BaseDAO{
 
     private final Class modelClass;
     private DatabaseConnectionInfo databaseConfig;
