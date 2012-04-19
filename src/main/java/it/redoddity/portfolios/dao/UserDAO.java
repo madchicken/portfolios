@@ -5,7 +5,6 @@
 package it.redoddity.portfolios.dao;
 
 import it.redoddity.dao.BaseDAO;
-import it.redoddity.portfolios.model.Project;
 import it.redoddity.portfolios.model.User;
 import it.redoddity.utils.DatabaseConnectionInfo;
 import java.sql.SQLException;
@@ -21,12 +20,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDAO extends BaseDAO {
 
-   
-
     @Autowired
     public UserDAO(DatabaseConnectionInfo info) {
         super(User.class, info);
-        Project.userDAO = this;
+        User.setDao(this);
     }
     
     public User findById(String id) {

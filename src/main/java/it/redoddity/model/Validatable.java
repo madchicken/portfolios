@@ -6,6 +6,7 @@ package it.redoddity.model;
 
 import java.util.List;
 import java.util.Map;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
 /**
@@ -25,10 +26,11 @@ public abstract class Validatable extends Model {
         getDataBinder().getBindingResult().addError(new ObjectError(this.getClass().getSimpleName(), err));
     }
 
+    public void addError(String field, String err) {
+        getDataBinder().getBindingResult().addError(new FieldError(this.getClass().getSimpleName(), field, err));
+    }
+
     public List<ObjectError> getAllErrors() {
-        if(getDataBinder().getValidator() != null) {
-            getDataBinder().validate();
-        }
         return getDataBinder().getBindingResult().getAllErrors();
     }
 
@@ -37,6 +39,7 @@ public abstract class Validatable extends Model {
     }
 
     public boolean isValid() {
+        getDataBinder().validate();
         return !getHasErrors();
     }
 }

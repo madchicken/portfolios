@@ -4,21 +4,30 @@
  */
 package it.redoddity.portfolios.model;
 
+import it.redoddity.dao.BaseDAO;
 import it.redoddity.model.Validatable;
+import it.redoddity.portfolios.dao.ProjectDAO;
+import it.redoddity.portfolios.dao.UserDAO;
 import java.util.Date;
 import java.util.Map;
-import org.apache.commons.validator.routines.EmailValidator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author madchicken
  */
 public class User extends Validatable {
+    protected static UserDAO dao;
     
+    public static void setDao(BaseDAO dao) {
+        User.dao = (UserDAO)dao;
+    }
+
+    public static BaseDAO getDao() {
+        return dao;
+    }
     
     private String firstName;
     

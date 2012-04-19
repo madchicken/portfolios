@@ -9,7 +9,18 @@
         <title>Portfolios Home Page</title>
     </head>
     <body>
-        <h1>Latest Projects</h1>
+        <div class="hero-unit">
+            <h1>Latest Projects</h1>
+            <p>What people do</p>
+            <c:if test="${empty user}">
+                <p>
+                    <a class="btn btn-primary btn-large" href="${root}/login">
+                    Login
+                    </a>
+                </p>
+            </c:if>
+        </div>        
+
         <div class="row">
             <c:if test="${not empty lastProjects}">
                 <c:forEach items="${lastProjects}" var="project">
@@ -21,13 +32,13 @@
                 </c:forEach>
             </c:if>
         </div>
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="${root}/home/index?from=${from-10}">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="${root}/home/index?from=${from+10}">Newer &rarr;</a>
-                    </li>
-                </ul>  
+        <ul class="pager">
+            <li class="previous">
+                <a href="${root}/home/index?from=${from-10}">&larr; Older</a>
+            </li>
+            <li class="next">
+                <a href="${root}/home/index?from=${from+10}">Newer &rarr;</a>
+            </li>
+        </ul>  
     </body>
 </html>

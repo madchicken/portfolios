@@ -184,6 +184,12 @@ public abstract class BaseDAO{
 
         execute(query, params);
     }
+    
+    public void delete(Model model) throws SQLException {
+        if(model.getId() != null) {
+            execute("delete from " + getTableName() + " where id = ?", model.getId());
+        }
+    }
 
     private List<String> guessPropertyNames(String tableName) {
         List<String> propertyNames = new ArrayList<>();

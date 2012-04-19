@@ -4,9 +4,9 @@
  */
 package it.redoddity.portfolios.model;
 
+import it.redoddity.dao.BaseDAO;
 import it.redoddity.model.Validatable;
 import it.redoddity.portfolios.dao.ProjectDAO;
-import it.redoddity.portfolios.dao.UserDAO;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +18,16 @@ import org.hibernate.validator.constraints.URL;
  * @author madchicken
  */
 public class Project extends Validatable {
+    protected static ProjectDAO dao;
 
-    public static UserDAO userDAO;
-    public static ProjectDAO projectDAO;
+    public static void setDao(BaseDAO dao) {
+        Project.dao = (ProjectDAO)dao;
+    }
+
+    public static BaseDAO getDao() {
+        return dao;
+    }
+    
     private String name;
     @NotBlank
     private String description;
@@ -34,7 +41,6 @@ public class Project extends Validatable {
 
     public Project(Map<String, Object> properties) {
         super(properties);
-
     }
 
     public Project(User leader) {
@@ -99,14 +105,14 @@ public class Project extends Validatable {
     }
 
     public User getLeader() {
-        return userDAO.findById(leaderId);
+        return ((ProjectDAO)dao).findLeaderById(leaderId);
     }
 
     public List<User> getCollaborators() {
-        return projectDAO.findProjectCollaborators(this);
+        return ((ProjectDAO)dao).findProjectCollaborators(this);
     }
 
     public void addCollaborator(User user) throws SQLException {
-        projectDAO.addCollaborator(this, user);
+        ((ProjectDAO)dao).addCollaborator(this, user);
     }
 }

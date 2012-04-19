@@ -25,12 +25,19 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ProjectDAO extends BaseDAO {
 
+    private UserDAO userDAO;
+    
     @Autowired
     public ProjectDAO(DatabaseConnectionInfo db) {
         super(Project.class, db);
-        Project.projectDAO = this;
+        Project.setDao(this);
     }
 
+    @Autowired
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+    
     public List<Project> findAll() {
         try {
             List<Map<String, Object>> projects = select("select * from Project");
@@ -106,5 +113,9 @@ public class ProjectDAO extends BaseDAO {
     public void addCollaborator(Project project, User user) throws SQLException{
         execute("insert into user_projects(user_id, project_id) values(?,?)", 
                 user.getId() , project.getId());
+    }
+    
+    public User findLeaderById(String leaderId) {
+        return userDAO.findById(leaderId);
     }
 }

@@ -22,4 +22,5 @@
     </bean>
     <bean id="validator"
       class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+    <import resource="classpath:database.xml"/>
 </beans>

@@ -4,8 +4,10 @@
  */
 package it.redoddity.model;
 
+import it.redoddity.dao.BaseDAO;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Map;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
@@ -20,14 +22,11 @@ import org.springframework.validation.Validator;
  */
 public abstract class Model {
 
-    private static Log log = LogFactory.getLog(Model.class);
     private String id;
     private Date createdAt;
     private Date updatedAt;
 
     private DataBinder dataBinder;
-    
-   
     
     protected Model() {
         dataBinder = new DataBinder(this);
@@ -54,9 +53,7 @@ public abstract class Model {
         return createdAt;
     }
     
-    
-
-    public void fromMap(Map<String, Object> properties) {
+    public final void fromMap(Map<String, Object> properties) {
         for (String propertyName : properties.keySet()) {
             try {
                 PropertyUtils.setProperty(this, propertyName, properties.get(propertyName));
@@ -93,7 +90,7 @@ public abstract class Model {
             dataBinder = new DataBinder(this);
         return dataBinder;
     }
-    
+        
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
