@@ -5,6 +5,7 @@
 package it.redoddity.model;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Date;
 import java.util.Map;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
@@ -21,8 +22,12 @@ public abstract class Model {
 
     private static Log log = LogFactory.getLog(Model.class);
     private String id;
+    private Date createdAt;
+    private Date updatedAt;
 
     private DataBinder dataBinder;
+    
+   
     
     protected Model() {
         dataBinder = new DataBinder(this);
@@ -32,6 +37,24 @@ public abstract class Model {
         fromMap(properties);
         dataBinder = new DataBinder(this);        
     }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+    
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+    
+    
 
     public void fromMap(Map<String, Object> properties) {
         for (String propertyName : properties.keySet()) {

@@ -16,7 +16,7 @@
             <prop key="jdbc.driver">com.mysql.jdbc.Driver</prop>
             <prop key="jdbc.url">jdbc:mysql://localhost:3306/portfolios</prop>
             <prop key="jdbc.username">root</prop>
-            <prop key="jdbc.password">redoddityjsp</prop>
+            <prop key="jdbc.password"></prop>
             </props>
         </constructor-arg>
     </bean>

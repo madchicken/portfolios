@@ -26,8 +26,9 @@ public abstract class Validatable extends Model {
     }
 
     public List<ObjectError> getAllErrors() {
-        if(getDataBinder().getValidator() != null)
+        if(getDataBinder().getValidator() != null) {
             getDataBinder().validate();
+        }
         return getDataBinder().getBindingResult().getAllErrors();
     }
 
