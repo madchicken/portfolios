@@ -45,34 +45,7 @@ LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `vote`
---
 
-DROP TABLE IF EXISTS `vote`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vote` (
-  `id` varchar(36) NOT NULL,
-  `user_id` varchar(36) NOT NULL,
-  `project_id` varchar(36) NOT NULL COMMENT '	',
-  `value` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_vote_user` (`user_id`),
-  KEY `fk_vote_project` (`project_id`),
-  CONSTRAINT `fk_vote_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_vote_project` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vote`
---
-
-LOCK TABLES `vote` WRITE;
-/*!40000 ALTER TABLE `vote` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vote` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -137,3 +110,32 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2012-04-19  9:05:16
+
+--
+-- Table structure for table `vote`
+--
+
+DROP TABLE IF EXISTS `vote`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vote` (
+  `id` varchar(36) NOT NULL,
+  `user_id` varchar(36) NOT NULL,
+  `project_id` varchar(36) NOT NULL COMMENT '	',
+  `value` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_vote_user` (`user_id`),
+  KEY `fk_vote_project` (`project_id`),
+  CONSTRAINT `fk_vote_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vote_project` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vote`
+--
+
+LOCK TABLES `vote` WRITE;
+/*!40000 ALTER TABLE `vote` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vote` ENABLE KEYS */;
+UNLOCK TABLES;

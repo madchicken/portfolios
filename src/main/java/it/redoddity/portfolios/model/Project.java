@@ -15,7 +15,6 @@ import org.hibernate.validator.constraints.URL;
  */
 public class Project extends Validatable {
     
-   
     private String name;
     
     @NotBlank
@@ -86,13 +85,25 @@ public class Project extends Validatable {
     public String getTags() {
         return tags;
     }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
     
     
     
-    
-    
-    
-    
-    
+            
     
 }
