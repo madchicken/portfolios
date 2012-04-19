@@ -26,9 +26,7 @@ public class ProjectDAO extends BaseDAO {
 
     @Autowired
     public ProjectDAO(DatabaseConnectionInfo db) {
-
         super(Project.class, db);
-
     }
 
     public List<Project> findAll() {
@@ -47,9 +45,25 @@ public class ProjectDAO extends BaseDAO {
         return null;
     }
     
-    public void create(Project project, User user) throws SQLException{
+    public List<Project> findById(String userId) {
+        try {
+            List<Map<String, Object>> projects = select("SELECT p.* FROM project p JOIN user_projects up ON (up.user_id = ?)", userId);
+            List<Project> list = new ArrayList<>();
+            for (int i = 0; i < projects.size(); i++) {
+                Map<String, Object> obj = projects.get(i);
+                Project project = new Project(obj);
+                list.add(project);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void create(Project project, User user) throws SQLException {
         create(project);
-        execute("insert into user_projects(user_id, project_id) values(?,?)", 
-                user.getId() , project.getId());
+        execute("insert into user_projects(user_id, project_id) values(?,?)",
+                user.getId(), project.getId());
     }
 }
