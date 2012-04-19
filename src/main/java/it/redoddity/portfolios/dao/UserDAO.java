@@ -26,7 +26,6 @@ public class UserDAO extends BaseDAO {
     @Autowired
     public UserDAO(DatabaseConnectionInfo info) {
         super(User.class, info);
-        init(TABLE_FIELDS);
         Project.userDAO = this;
     }
     
