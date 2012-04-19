@@ -17,8 +17,10 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class User extends Validatable {
     
-    @NotBlank
-    private String name;
+    
+    private String firstName;
+    
+    private String lastName;
 
     @NotBlank
     @Email
@@ -46,13 +48,23 @@ public class User extends Validatable {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+    
+    
 
     public String getPassword() {
         return password;

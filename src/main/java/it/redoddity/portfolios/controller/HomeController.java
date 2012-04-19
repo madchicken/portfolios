@@ -14,6 +14,5 @@ import org.springframework.stereotype.Controller;
 @Controller(value="home")
 @Scope("prototype")
 public class HomeController extends ApplicationController {
-
     
 }

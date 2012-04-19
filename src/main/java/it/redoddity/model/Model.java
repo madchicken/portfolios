@@ -29,13 +29,17 @@ public abstract class Model {
     }
 
     public Model(Map<String, Object> properties) {
+        fromMap(properties);
+        dataBinder = new DataBinder(this);        
+    }
+
+    public void fromMap(Map<String, Object> properties) {
         for (String propertyName : properties.keySet()) {
             try {
                 PropertyUtils.setProperty(this, propertyName, properties.get(propertyName));
             } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             }
         }
-        dataBinder = new DataBinder(this);        
     }
 
     public void bind(Map<String, String[]> params, Validator validator) {

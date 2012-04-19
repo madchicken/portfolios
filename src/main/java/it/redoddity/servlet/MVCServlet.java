@@ -85,6 +85,8 @@ public class MVCServlet extends HttpServlet {
         initFixtures();
         getServletContext().setAttribute("root", 
                 getServletContext().getContextPath()+"/mvc");
+        getServletContext().setAttribute("contextRoot", 
+                getServletContext().getContextPath());
         getServletContext().setAttribute("springContext", context);
     }
 

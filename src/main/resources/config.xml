@@ -8,13 +8,13 @@
          http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
    <context:annotation-config/>
-   <context:component-scan base-package="it.redoddity.*"/>
+   <context:component-scan base-package="it.redoddity.portfolios.*"/>
 
     <bean id="connectionInfo" class="it.redoddity.utils.DatabaseConnectionInfo">
         <constructor-arg type="java.util.Properties">
             <props>
             <prop key="jdbc.driver">com.mysql.jdbc.Driver</prop>
-            <prop key="jdbc.url">jdbc:mysql://localhost3306/portfolios</prop>
+            <prop key="jdbc.url">jdbc:mysql://localhost:3306/portfolios</prop>
             <prop key="jdbc.username">root</prop>
             <prop key="jdbc.password"></prop>
             </props>

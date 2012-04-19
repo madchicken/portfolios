@@ -5,6 +5,7 @@
 package it.redoddity.portfolios.model;
 
 import it.redoddity.model.Validatable;
+import java.util.Map;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
@@ -14,7 +15,7 @@ import org.hibernate.validator.constraints.URL;
  */
 public class Project extends Validatable {
     
-    @NotBlank
+   
     private String name;
     
     @NotBlank
@@ -30,7 +31,14 @@ public class Project extends Validatable {
     private Float rating;
     private String tags;
     
+    public Project(Map<String, Object> properties) {
+        super(properties);
+    }
 
+    public Project() {
+        super();
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
