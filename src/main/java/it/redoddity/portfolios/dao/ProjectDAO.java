@@ -41,7 +41,7 @@ public class ProjectDAO extends BaseDAO {
     public List<Project> findAll() {
         try {
             List<Map<String, Object>> projects = select("select * from project");
-            resultToProjectList(projects);
+            return resultToProjectList(projects);
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
