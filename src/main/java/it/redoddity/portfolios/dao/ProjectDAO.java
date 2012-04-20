@@ -111,6 +111,16 @@ public class ProjectDAO extends BaseDAO {
         return null;
     }
     
+    public Project findById(String id) {
+        try {
+            List<Map<String, Object>> project = select("SELECT * FROM project where id = ?", id);
+            return project.size() == 1 ? resultToProjectList(project).get(0) : null;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public boolean exists(Project project) {
         return findByName(project.getName()) != null;
     }

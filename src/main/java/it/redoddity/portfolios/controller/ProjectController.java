@@ -50,4 +50,9 @@ public class ProjectController extends ApplicationController{
         render("new");
     }
     
+    public void view() throws ServletException, IOException {
+        String projectId = (String) request.getAttribute("id");
+        request.setAttribute("project", projectDAO.findById(projectId));
+        render("view");
+    }
 }
