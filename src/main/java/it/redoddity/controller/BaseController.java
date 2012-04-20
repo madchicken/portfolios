@@ -24,7 +24,7 @@ public class BaseController {
 
     @Autowired
     protected Validator validator;
-    
+
     public BaseController() {
     }
     
