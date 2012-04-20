@@ -32,13 +32,17 @@
                 </c:forEach>
             </c:if>
         </div>
+        
         <ul class="pager">
+        
             <li class="previous">
                 <a href="${root}/home/index?from=${from-10}">&larr; Older</a>
             </li>
+       
             <li class="next">
                 <a href="${root}/home/index?from=${from+10}">Newer &rarr;</a>
             </li>
         </ul>  
+            
     </body>
 </html>

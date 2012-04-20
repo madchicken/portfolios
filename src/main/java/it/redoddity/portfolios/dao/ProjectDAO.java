@@ -56,7 +56,7 @@ public class ProjectDAO extends BaseDAO {
     
     public List<Project> findUserProjects(User user) {
         try {
-            List<Map<String, Object>> projects = select("SELECT p.* FROM project p JOIN user_projects up ON (up.user_id = ?)", user.getId());
+            List<Map<String, Object>> projects = select("SELECT p.* FROM project p JOIN user_projects up ON (up.user_id = p.leaderId) WHERE p.leaderId = ?", user.getId());
             List<Project> list = new ArrayList<>();
             for (int i = 0; i < projects.size(); i++) {
                 Map<String, Object> obj = projects.get(i);
