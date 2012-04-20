@@ -62,4 +62,19 @@ public class ProjectController extends ApplicationController{
         projectDAO.delete(project);
         render("delete");
     }
+    
+    public void edit() throws ServletException, IOException {
+        String projectId = (String) request.getAttribute("id");
+        Project project = projectDAO.findById(projectId);
+        request.setAttribute("project", project);
+        render("edit");
+    }
+    
+    public void update() throws SQLException, ServletException, IOException {
+        User user = getCurrentUser();
+        Project project = new Project(user);
+        project.bind(request.getParameterMap(), validator);
+        projectDAO.update(project);
+        redirect("dashboard");
+    }
 }

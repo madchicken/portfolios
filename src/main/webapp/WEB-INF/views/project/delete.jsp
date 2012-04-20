@@ -12,6 +12,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="row">
+            <div class="span4">
+                <div class="alert alert-success">
+                    <a class="close" data-dismiss="alert">x</a>
+                    <strong>Well Done!</strong> You successfully delete your project!
+                </div>
+            </div>
+        </div>
     </body>
 </html>
