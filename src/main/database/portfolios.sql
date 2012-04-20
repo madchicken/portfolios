@@ -126,16 +126,16 @@ DROP TABLE IF EXISTS `vote`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vote` (
   `id` varchar(36) NOT NULL,
-  `user_id` varchar(36) NOT NULL,
-  `project_id` varchar(36) NOT NULL COMMENT '	',
+  `userId` varchar(36) NOT NULL,
+  `projectId` varchar(36) NOT NULL,
   `value` int(11) NOT NULL,
   `createdAt` date DEFAULT NULL,
   `updatedAt` date DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_vote_user` (`user_id`),
-  KEY `fk_vote_project` (`project_id`),
-  CONSTRAINT `fk_vote_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_vote_project` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_vote_user` (`userId`),
+  KEY `fk_vote_project` (`projectId`),
+  CONSTRAINT `fk_vote_user` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vote_project` FOREIGN KEY (`projectId`) REFERENCES `project` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

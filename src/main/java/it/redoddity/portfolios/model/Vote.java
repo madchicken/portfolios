@@ -7,6 +7,7 @@ package it.redoddity.portfolios.model;
 import it.redoddity.dao.BaseDAO;
 import it.redoddity.model.Validatable;
 import it.redoddity.portfolios.dao.VoteDAO;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +15,13 @@ import it.redoddity.portfolios.dao.VoteDAO;
  */
 public class Vote extends Validatable  {
     private static VoteDAO dao;
+
+    public Vote(Map<String, Object> properties) {
+        super(properties);
+    }
+
+    public Vote() {
+    }
     
     public static void setDao(BaseDAO dao) {
         Vote.dao = (VoteDAO)dao;
@@ -26,7 +34,7 @@ public class Vote extends Validatable  {
     private Integer value;
     private String userId;
     private String projectId;
-
+    
     public void setValue(Integer value) {
         this.value = value;
     }

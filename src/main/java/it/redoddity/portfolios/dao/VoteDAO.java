@@ -12,11 +12,13 @@ import it.redoddity.utils.DatabaseConnectionInfo;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author madchicken
  */
+@Repository
 public class VoteDAO extends BaseDAO<Vote> {
 
     @Autowired
@@ -24,8 +26,13 @@ public class VoteDAO extends BaseDAO<Vote> {
         super(Vote.class, db);
         Vote.setDao(this);
     }
+    
+    public Vote getUserVoteForProject(User user, Project project) throws SQLException {
+        List<Vote> votes = select("select * from vote where userId = ? and projectId = ?", user.getId(), project.getId());
+        return (votes.size() == 1) ? votes.get(0) : null;
+    }
 
-    public List<Vote> getVotesByProject(Project project) throws SQLException {
-        return select("select * from vote where project_id =?", project.getId());
+    public List<Vote> findVotesByProject(Project project) throws SQLException {
+        return select("select * from vote where projectId =?", project.getId());
     }
 }

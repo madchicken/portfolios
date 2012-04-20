@@ -16,6 +16,7 @@
                 padding-bottom: 40px;
             }
         </style>
+        <script src="${contextRoot}/js/jquery.js"></script>
         <link href="${contextRoot}/css/bootstrap-responsive.css" rel="stylesheet">
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -85,7 +86,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="${contextRoot}/js/jquery.js"></script>
+    
     <script src="${contextRoot}/js/bootstrap.js"></script>
 
 </body>

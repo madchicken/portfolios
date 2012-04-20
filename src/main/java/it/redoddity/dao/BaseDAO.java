@@ -215,7 +215,7 @@ public abstract class BaseDAO<T extends Model> {
             try {
                 params[i] = PropertyUtils.getProperty(model, propertyName);
             } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                throw new SQLException(e);
+                //throw new SQLException(e);
             }
             i++;
         }

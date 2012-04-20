@@ -5,8 +5,10 @@
 package it.redoddity.portfolios.controller;
 
 import it.redoddity.portfolios.dao.ProjectDAO;
+import it.redoddity.portfolios.dao.VoteDAO;
 import it.redoddity.portfolios.model.Project;
 import it.redoddity.portfolios.model.User;
+import it.redoddity.portfolios.model.Vote;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,10 +27,17 @@ import org.springframework.stereotype.Controller;
 public class ProjectController extends ApplicationController{
     
     private ProjectDAO projectDAO;
+    
+    private VoteDAO voteDAO;
 
     @Autowired
     public void setProjectDAO(ProjectDAO projectDAO) {
         this.projectDAO = projectDAO;
+    }
+
+    @Autowired
+    public void setVoteDAO(VoteDAO voteDAO) {
+        this.voteDAO = voteDAO;
     }
     
     public void newproject() throws ServletException, IOException {
@@ -55,7 +64,10 @@ public class ProjectController extends ApplicationController{
     public void view() throws ServletException, IOException {
         try {
             String projectId = (String) request.getAttribute("id");
-            request.setAttribute("project", projectDAO.findById(projectId));
+            Project project = projectDAO.findById(projectId);
+            request.setAttribute("project", project);
+            Vote vote = voteDAO.getUserVoteForProject(getCurrentUser(), project);
+            request.setAttribute("vote", vote == null ? 0 : vote.getValue());
             render("view");
         } catch (SQLException ex) {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
