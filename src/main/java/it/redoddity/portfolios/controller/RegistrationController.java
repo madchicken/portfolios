@@ -52,7 +52,7 @@ public class RegistrationController extends BaseController {
                         request.getParameter("passwordConfirm"))) {
                     user.addError("Passwords don't match");
                 } else {
-                    if (userDAO.exists(user.getEmail())) {
+                    if (userDAO.exists(user.getEmail(), "")) {
                         user.addError("email", user.getEmail()
                                 + " is already present in repository");
                     } else {

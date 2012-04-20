@@ -21,6 +21,7 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             <p><a href="${root}/registration">Not yet registered?</a></p>
+            <p><a href="${root}/user">list users</a></p>
 
         </div>
     </body>

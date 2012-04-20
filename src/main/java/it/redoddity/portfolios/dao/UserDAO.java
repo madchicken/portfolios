@@ -8,6 +8,7 @@ import it.redoddity.dao.BaseDAO;
 import it.redoddity.portfolios.model.User;
 import it.redoddity.utils.DatabaseConnectionInfo;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,10 @@ public class UserDAO extends BaseDAO {
         }
     }
     
-    public User findByEmail(String email) {
+    public User findByEmail(String email, String id) {
         try {
             List<Map<String, Object>> results = select("select * from "+
-                    getTableName()+" where email = ?", email);
+                    getTableName()+" where email = ? and id <> ?", email, id);
 
             if (results.size() == 1) {
                 Map<String, Object> result = results.get(0);
@@ -62,7 +63,26 @@ public class UserDAO extends BaseDAO {
         }
     }
 
-    public boolean exists(String email) {
-        return findByEmail(email) != null;
+    public boolean exists(String email, String id) {
+        return findByEmail(email, id) != null;
+    }
+    
+        public List<User> findAll() {
+        try {
+            List<Map<String, Object>> results = select("select * from " + getTableName() + 
+                    "  order by nickName asc");
+
+            List<User> users = new ArrayList<>();
+
+            for (Map<String, Object> map : results) {
+                User user = new User(map);
+                users.add(user);
+            }
+
+            return users;
+
+        } catch (SQLException sqle) {
+            return null;
+        }
     }
 }

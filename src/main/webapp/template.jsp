@@ -53,6 +53,8 @@
                             <ul class="dropdown-menu">
                                 <li><a href="${root}/dashboard">Dashboard</a></li>
                                 <li class="divider"></li>
+                                <li><a href="${root}/user/profile">Your profile</a></li>
+                                <li class="divider"></li>
                                 <li><a href="${root}/logout/logout">Logout</a></li>
                             </ul>
                         </li>

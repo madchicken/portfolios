@@ -36,7 +36,7 @@ public class LoginController extends BaseController {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         
-        User user = userDAO.findByEmail(email);
+        User user = userDAO.findByEmail(email, "");
         
         if(user != null && user.getPassword().equals(password)) {
             
