@@ -19,7 +19,7 @@
                     <h2><a href="${root}/project/view/${ownProject.id}">${ownProject.name}</a></h2>
                     <p>${ownProject.description}</p>
                     <p>
-                        <a class="btn" href="${root}/project/view/${ownProject.id}"><i class="icon-eye-open"></i>View Details</a>
+                        <a class="btn" href="${root}/project/view/${ownProject.id}">View Details &rarr;</a>
                     </p>
                 </div>
             </div>

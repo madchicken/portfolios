@@ -55,4 +55,11 @@ public class ProjectController extends ApplicationController{
         request.setAttribute("project", projectDAO.findById(projectId));
         render("view");
     }
+    
+    public void delete() throws SQLException, ServletException, IOException {
+        String projectId = (String) request.getAttribute("id");
+        Project project = projectDAO.findById(projectId);
+        projectDAO.delete(project);
+        render("delete");
+    }
 }
