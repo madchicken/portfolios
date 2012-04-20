@@ -8,9 +8,7 @@ import it.redoddity.controller.BaseController;
 import it.redoddity.portfolios.dao.UserDAO;
 import it.redoddity.portfolios.model.User;
 import it.redoddity.utils.ServletUtils;
-import java.io.IOException;
 import java.sql.SQLException;
-import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 

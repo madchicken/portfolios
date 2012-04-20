@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,6 +23,9 @@
             <li class="span8">
                 <p>${project.description}</p>
                 <h3>Rating: </h3><h1>4.0</h1>
+                <c:forEach items="${project.getCollaborators()}" var="collaborator">
+                    ${collaborator.nickName}
+                </c:forEach>
             </li>
         </ul>
         <a class="btn" href="${root}/dashboard">&larr; Go Back</a>
