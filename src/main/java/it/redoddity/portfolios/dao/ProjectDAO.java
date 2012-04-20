@@ -72,7 +72,7 @@ public class ProjectDAO extends BaseDAO {
         try {
             List<Map<String, Object>> collaborators = select("select * from user join user_projects on user.id = user_projects.user_id where user_projects.project_id =?",project.getId());
             List<User> list = new ArrayList<>();
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < collaborators.size(); i++) {
                 Map<String, Object> obj = collaborators.get(i);
                 User user = new User(obj);
                 list.add(user);
