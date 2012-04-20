@@ -6,19 +6,21 @@ package it.redoddity.portfolios.model;
 
 import it.redoddity.dao.BaseDAO;
 import it.redoddity.model.Validatable;
+import it.redoddity.portfolios.dao.VoteDAO;
 
 /**
  *
  * @author madchicken
  */
 public class Vote extends Validatable  {
+    private static VoteDAO dao;
     
     public static void setDao(BaseDAO dao) {
-        throw new UnsupportedOperationException();
+        Vote.dao = (VoteDAO)dao;
     }
 
     public static BaseDAO getDao() {
-        throw new UnsupportedOperationException();
+        return Vote.dao;
     }
 
     private Integer value;
