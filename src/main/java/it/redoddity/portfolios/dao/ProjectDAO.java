@@ -50,7 +50,7 @@ public class ProjectDAO extends BaseDAO {
     
     public List<Project> findUserProjects(User user) {
         try {
-            List<Map<String, Object>> projects = select("SELECT p.* FROM project p JOIN user_projects up ON (up.user_id = p.leaderId) WHERE p.leaderId = ?", user.getId());
+            List<Map<String, Object>> projects = select("SELECT * FROM project WHERE id IN (select project_id from user_projects where user_id = ?)", user.getId());
             return resultToProjectList(projects);
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
