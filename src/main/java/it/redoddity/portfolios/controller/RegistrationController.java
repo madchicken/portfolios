@@ -10,6 +10,8 @@ import it.redoddity.portfolios.model.User;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,17 +54,22 @@ public class RegistrationController extends BaseController {
                         request.getParameter("passwordConfirm"))) {
                     user.addError("Passwords don't match");
                 } else {
-                    if (userDAO.exists(user.getEmail())) {
-                        user.addError("email", user.getEmail()
-                                + " is already present in repository");
-                    } else {
-                        try {
-                            userDAO.create(user);
-                            response.sendRedirect(request.getContextPath());
-                            return;
-                        } catch (SQLException sqle) {
-                            user.addError("Errore creating user: " + sqle.getMessage());
+                    try {
+                        User u = userDAO.findByEmail(user.getEmail());
+                        if (u != null && !user.equals(u)) {
+                            user.addError("email", user.getEmail()
+                                    + " is already present in repository");
+                        } else {
+                            try {
+                                userDAO.create(user);
+                                response.sendRedirect(request.getContextPath());
+                                return;
+                            } catch (SQLException sqle) {
+                                user.addError("Errore creating user: " + sqle.getMessage());
+                            }
                         }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }

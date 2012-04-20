@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class VoteDAO extends BaseDAO<Vote> {
+
     @Autowired
     public VoteDAO(DatabaseConnectionInfo db) {
         super(Vote.class, db);
@@ -30,5 +31,8 @@ public class VoteDAO extends BaseDAO<Vote> {
         List<Vote> votes = select("select * from vote where userId = ? and projectId = ?", user.getId(), project.getId());
         return (votes.size() == 1) ? votes.get(0) : null;
     }
-    
+
+    public List<Vote> findVotesByProject(Project project) throws SQLException {
+        return select("select * from vote where projectId =?", project.getId());
+    }
 }

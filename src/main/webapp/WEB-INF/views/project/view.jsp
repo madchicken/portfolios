@@ -15,13 +15,17 @@
             </h1>
         </div>
         <ul class="thumbnails">
-            <li class="span3">
+            <li class="span4">
                 <a href="#" class="thumbnail">
-                    <img src="http://placehold.it/360x268" alt="">
+                    <img src="${project.thumbnailUrl}" alt="">
                 </a>
             </li>
             <li class="span8">
                 <p>${project.description}</p>
+                <h3>Rating: </h3><h1>4.0</h1>
+                <c:forEach items="${project.getCollaborators()}" var="collaborator">
+                    ${collaborator.nickName}
+                </c:forEach>
             </li>
         </ul>
         <c:if test="${not empty user}">

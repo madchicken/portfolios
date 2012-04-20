@@ -34,13 +34,10 @@ public class DashboardController extends ApplicationController{
     
     @Override
     public void index() throws ServletException, IOException {
-        try {
+
             User user = getCurrentUser();
             List<Project> ownProjects = projectDAO.findUserProjects(user);
             request.setAttribute("ownProjects", ownProjects);
             render("index");
-        } catch (SQLException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }
