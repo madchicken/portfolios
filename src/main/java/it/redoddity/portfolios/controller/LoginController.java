@@ -11,6 +11,8 @@ import it.redoddity.utils.ServletUtils;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,29 +35,33 @@ public class LoginController extends BaseController {
     }
 
     public void login() throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-        User user = userDAO.findByEmail(email);
-        
-        if(user != null && user.getPassword().equals(password)) {
+        try {
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
             
-            user.setLoginAt(new Date());
-            try {
-                userDAO.update(user);
-            } catch (SQLException sqle) {
-                throw new ServletException(sqle);
+            User user = userDAO.findByEmail(email);
+            
+            if(user != null && user.getPassword().equals(password)) {
+                
+                user.setLoginAt(new Date());
+                try {
+                    userDAO.update(user);
+                } catch (SQLException sqle) {
+                    throw new ServletException(sqle);
+                }
+                
+                Cookie c = new Cookie("portfolios.userid", user.getId());
+                c.setPath("/");
+                c.setMaxAge(60*60*24*265);
+                response.addCookie(c);
+                request.getSession().setAttribute("user", user);
+                redirect("home");
+            } else {
+                request.setAttribute("error", "Email or password are wrong!");
+                render("index");
             }
-            
-            Cookie c = new Cookie("portfolios.userid", user.getId());
-            c.setPath("/");
-            c.setMaxAge(60*60*24*265);
-            response.addCookie(c);
-            request.getSession().setAttribute("user", user);
-            redirect("home");
-        } else {
-            request.setAttribute("error", "Email or password are wrong!");
-            render("index");
-        }        
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

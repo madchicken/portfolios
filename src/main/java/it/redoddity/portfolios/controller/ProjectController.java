@@ -9,6 +9,8 @@ import it.redoddity.portfolios.model.Project;
 import it.redoddity.portfolios.model.User;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -51,8 +53,12 @@ public class ProjectController extends ApplicationController{
     }
     
     public void view() throws ServletException, IOException {
-        String projectId = (String) request.getAttribute("id");
-        request.setAttribute("project", projectDAO.findById(projectId));
-        render("view");
+        try {
+            String projectId = (String) request.getAttribute("id");
+            request.setAttribute("project", projectDAO.findById(projectId));
+            render("view");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
