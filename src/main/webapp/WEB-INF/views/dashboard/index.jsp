@@ -10,16 +10,16 @@
             <h1>
                 Dashboard
                 <small>Here you'll find your own projects</small>
-                <a class="btn btn-primary" href="${root}/project/newproject">Add Project</a>
+                <a class="btn btn-success" href="${root}/project/newproject"><i class="icon-plus icon-white"></i> Add Project</a>
             </h1>
         </div>
         <c:forEach items="${ownProjects}" var="ownProject">
             <div class="row">
                 <div class="span12">
-                    <h2>${ownProject.name}</h2>
+                    <h2><a href="${root}/project/view/${ownProject.id}">${ownProject.name}</a></h2>
                     <p>${ownProject.description}</p>
                     <p>
-                        <a class="btn" href="#details">View Details</a>
+                        <a class="btn" href="${root}/project/view/${ownProject.id}"><i class="icon-eye-open"></i>View Details</a>
                     </p>
                 </div>
             </div>

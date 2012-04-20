@@ -47,7 +47,8 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Add Project</button>
+                <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> Add Project</button>
+                <a class="btn" href="${root}/dashboard"><i class="icon-arrow-left"></i> Cancel</a>
             </div>
         </fieldset>
     </form>

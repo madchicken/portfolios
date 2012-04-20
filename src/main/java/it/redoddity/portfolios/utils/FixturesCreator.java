@@ -39,7 +39,7 @@ public class FixturesCreator {
     public void create() {
         try {
 
-            if (!userDAO.exists("test@redoddity.it", "")) {
+            if (!userDAO.exists("test@redoddity.it")) {
                 User user = new User();
                 user.setEmail("test@redoddity.it");
                 user.setPassword("password");

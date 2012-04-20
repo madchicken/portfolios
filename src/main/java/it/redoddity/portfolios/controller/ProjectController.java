@@ -9,6 +9,8 @@ import it.redoddity.portfolios.model.Project;
 import it.redoddity.portfolios.model.User;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -37,13 +39,26 @@ public class ProjectController extends ApplicationController{
         User user = getCurrentUser();
         Project project = new Project(user);
         project.bind(request.getParameterMap(), validator);
-        if (project.isValid()) {
-            projectDAO.create(project);
-            redirect("dashboard");
+        if(!projectDAO.exists(project)) {
+            if (project.isValid()) {
+                projectDAO.create(project);
+                redirect("dashboard");
+                return;
+            }
         } else {
-            request.setAttribute("project", project);
-            render("new");
+            project.addError("A project with the same name already exists!");
         }
+        request.setAttribute("project", project);
+        render("new");
     }
     
+    public void view() throws ServletException, IOException {
+        try {
+            String projectId = (String) request.getAttribute("id");
+            request.setAttribute("project", projectDAO.findById(projectId));
+            render("view");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

@@ -8,6 +8,7 @@ import it.redoddity.dao.BaseDAO;
 import it.redoddity.model.Validatable;
 import it.redoddity.portfolios.dao.ProjectDAO;
 import it.redoddity.portfolios.dao.UserDAO;
+import it.redoddity.portfolios.utils.MD5Utils;
 import java.util.Date;
 import java.util.Map;
 import org.hibernate.validator.constraints.Email;
@@ -105,7 +106,8 @@ public class User extends Validatable {
         return nickName;
     }
     
-    
-
+    public String getGravatarURL() {
+        return "http://www.gravatar.com/avatar/" + MD5Utils.md5Hex(email);
+    }
     
 }

@@ -2,6 +2,9 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@page import="it.redoddity.portfolios.model.Project"%>
+<c:if test="${from gt projectsSize || from lt 0}">
+    <c:redirect url="?from=0" />
+</c:if>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +18,7 @@
             <c:if test="${empty user}">
                 <p>
                     <a class="btn btn-primary btn-large" href="${root}/login">
-                    Login
+                        Login
                     </a>
                 </p>
             </c:if>
@@ -32,13 +35,21 @@
                 </c:forEach>
             </c:if>
         </div>
+
         <ul class="pager">
-            <li class="previous">
-                <a href="${root}/home/index?from=${from-10}">&larr; Older</a>
-            </li>
-            <li class="next">
-                <a href="${root}/home/index?from=${from+10}">Newer &rarr;</a>
-            </li>
-        </ul>  
+            <c:if test="${projectsSize gt from+10}">
+            
+                <li class="previous">
+                    <a href="${root}/home/index?from=${from+(from+10)}">&larr; Older</a>
+                </li>
+            </c:if>
+            <c:if test="${from gt 9}">
+                <li class="next">
+                    <a href="${root}/home/index?from=${from-(from+10)}">Newer &rarr;</a>
+                </li>
+            </c:if>
+            </ul>  
+
+       
     </body>
 </html>
