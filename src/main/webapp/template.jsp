@@ -50,11 +50,12 @@
                     </ul>
                     <ul class="nav pull-right">
                         <li id="fat-menu" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> Account <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-home icon-white"></i> Account <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <c:choose>
                                     <c:when test="${not empty user}">
                                         <li><a href="${root}/dashboard"><i class="icon-folder-open"></i> Dashboard</a></li>
+                                        <li><a href="${root}/user/profile"><i class="icon-user"></i> Your profile</a></li>
                                         <li class="divider"></li>
                                         <li><a href="${root}/logout/logout"><i class="icon-share"></i> Logout</a></li>
                                     </c:when>

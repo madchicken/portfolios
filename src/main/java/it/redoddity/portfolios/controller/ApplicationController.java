@@ -9,6 +9,7 @@ import it.redoddity.portfolios.dao.UserDAO;
 import it.redoddity.portfolios.model.User;
 import it.redoddity.utils.ServletUtils;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public abstract class ApplicationController extends BaseController {
         this.userDAO = userDAO;
     }
 
-    protected User getCurrentUser() {
+    protected User getCurrentUser() throws SQLException {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {

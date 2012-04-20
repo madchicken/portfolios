@@ -17,13 +17,13 @@
 
         <form action="${root}/registration/register" method="post" class="well">
             <label for="nickname">Nickname
-                <input type="text" class="span3" placeholder="superhero" name="nickName" id="nickname"/>
+                <input type="text" class="span3" placeholder="superhero" name="nickName" id="nickname" value="${param.nickname}"/>
             </label>
             <label for="email">Email
-                <input type="text" class="span3" placeholder="john@something.com" name="email" id="email"/>
+                <input type="text" class="span3" placeholder="john@something.com" name="email" id="email" value="${param.email}"/>
             </label>
             <label for="password">Password
-                <input type="password" class="span3" placeholder="super secret" name="password" id="password"/>
+                <input type="password" class="span3" placeholder="super secret" name="password" id="password" />
             </label>
             <label for="passwordConfirm">Confirm password
                 <input id="passwordConfirm" name="passwordConfirm" type="password" placeholder="super secret" class="span3" /><br />

@@ -7,7 +7,10 @@ package it.redoddity.portfolios.controller;
 import it.redoddity.portfolios.dao.ProjectDAO;
 import it.redoddity.portfolios.model.Project;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,21 +37,25 @@ public class HomeController extends ApplicationController {
     
     @Override
     public void index() throws ServletException, IOException {
-        int from = 0;
-        int to = 10;
-        try{
-            from = Integer.parseInt(request.getParameter("from"));
-            //to = Integer.parseInt(request.getParameter("to"));
-        }catch(NumberFormatException ex){
-            log.error(ex,ex);
+        try {
+            int from = 0;
+            int to = 10;
+            try{
+                from = Integer.parseInt(request.getParameter("from"));
+                //to = Integer.parseInt(request.getParameter("to"));
+            }catch(NumberFormatException ex){
+                log.error(ex,ex);
+            }
+                    
+            List<Project> projects =  projectDAO.findLastProjects(from, to);
+            int projectsSize = projectDAO.findAll().size();
+            request.setAttribute("lastProjects", projects);
+            request.setAttribute("projectsSize", projectsSize);
+            request.setAttribute("from", from);
+            render();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
-        List<Project> projects =  projectDAO.findLastProjects(from, to);
-        int projectsSize = projectDAO.findAll().size();
-        request.setAttribute("lastProjects", projects);
-        request.setAttribute("projectsSize", projectsSize);
-        request.setAttribute("from", from);
-        render();
         
     }
         
