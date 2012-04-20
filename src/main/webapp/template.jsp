@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,9 +52,16 @@
                         <li id="fat-menu" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="${root}/dashboard">Dashboard</a></li>
-                                <li class="divider"></li>
-                                <li><a href="${root}/logout/logout">Logout</a></li>
+                                <c:choose>
+                                    <c:when test="${not empty user}">
+                                        <li><a href="${root}/dashboard">Dashboard</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="${root}/logout/logout">Logout</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="${root}/login">Login</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                             </ul>
                         </li>
                     </ul>
