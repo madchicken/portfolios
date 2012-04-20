@@ -5,11 +5,13 @@
 package it.redoddity.portfolios.dao;
 
 import it.redoddity.dao.BaseDAO;
+import it.redoddity.portfolios.model.Project;
 import it.redoddity.portfolios.model.User;
 import it.redoddity.utils.DatabaseConnectionInfo;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +20,8 @@ import org.springframework.stereotype.Repository;
  * @author alessandro
  */
 @Repository
-public class UserDAO extends BaseDAO {
+public class UserDAO extends BaseDAO<User> {
+    private static final Log log = LogFactory.getLog(UserDAO.class);
 
     @Autowired
     public UserDAO(DatabaseConnectionInfo info) {
@@ -26,43 +29,21 @@ public class UserDAO extends BaseDAO {
         User.setDao(this);
     }
     
-    public User findById(String id) {
-        try {
-            List<Map<String, Object>> results = select("select * from "+
-                    getTableName()+" where id = ?", id);
+    public User findByEmail(String email) throws SQLException {
+        List<User> users = findByProperty("email", email);
+        return users.size() == 1 ? users.get(0) : null;
+    }
 
-            if (results.size() == 1) {
-                Map<String, Object> result = results.get(0);
-                User user = new User(result);
-                return user;
-            } else {
-                return null;
-            }
-
-        } catch (SQLException sqle) {
-            return null;
-        }
+    public List<User> findCollaboratorsForProject(Project project) throws SQLException {
+        return select("select * from user join user_projects on user.id = user_projects.user_id where user_projects.project_id =?", project.getId());        
     }
     
-    public User findByEmail(String email) {
-        try {
-            List<Map<String, Object>> results = select("select * from "+
-                    getTableName()+" where email = ?", email);
-
-            if (results.size() == 1) {
-                Map<String, Object> result = results.get(0);
-                User user = new User(result);
-                return user;
-            } else {
-                return null;
-            }
-
-        } catch (SQLException sqle) {
-            return null;
-        }
-    }
-
     public boolean exists(String email) {
-        return findByEmail(email) != null;
+        try {
+            return findByEmail(email) != null;
+        } catch (SQLException ex) {
+            log.error(ex, ex);
+        }
+        return false;
     }
 }

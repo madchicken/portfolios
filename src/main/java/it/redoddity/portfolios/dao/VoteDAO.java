@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author madchicken
  */
-public class VoteDAO extends BaseDAO {
+public class VoteDAO extends BaseDAO<Vote> {
     @Autowired
     public VoteDAO(DatabaseConnectionInfo db) {
         super(Vote.class, db);
