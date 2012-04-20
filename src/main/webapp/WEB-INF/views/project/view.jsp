@@ -22,9 +22,9 @@
             </li>
             <li class="span8">
                 <p>${project.description}</p>
-                <h3>Rating: </h3><h1>4.0</h1>
+                <h3>Rating: </h3><h1><span id="rating">${project.rating}</span><span id="spinner" class="hidden"><image src="${contextRoot}/img/ajax-loader.gif"/></span></h1>
                 <c:forEach items="${project.getCollaborators()}" var="collaborator">
-                    ${collaborator.nickName}
+                    ${collaborator.nickName}rating
                 </c:forEach>
             </li>
         </ul>
@@ -37,7 +37,9 @@
                     <a class="btn star" href="#" id="star4"><i class="icon-star-empty"></i></a>
                     <a class="btn star" href="#" id="star5"><i class="icon-star-empty"></i></a>
                 </div>
+                
             </div>
+            
         </c:if>
 
         <a class="btn" href="${root}/dashboard">&larr; Go Back</a>
@@ -77,12 +79,19 @@
                             url: "${root}/vote/vote",      
                             dataType: 'json',
                             type: 'POST',
+                            beforeSend: function() {
+                                $('#spinner').removeClass("hidden");
+                            },
+                            complete: function() {
+                                $('#spinner').addClass("hidden");
+                            },
                             data: {
                                 value: value,
                                 userId: "${user.id}",
                                 projectId: "${project.id}"
                             },
-                            success: function() {
+                            success: function(rating) {
+                                $('#rating').html(""+rating);
                                 vote = new Number(value);
                                 resetStars();
                             },

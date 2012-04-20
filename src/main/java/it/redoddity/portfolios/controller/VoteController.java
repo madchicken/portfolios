@@ -11,6 +11,7 @@ import it.redoddity.portfolios.model.User;
 import it.redoddity.portfolios.model.Vote;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -42,7 +43,8 @@ public class VoteController extends ApplicationController {
     public void vote() throws ServletException, IOException {
         try {
             String projectId = request.getParameter("projectId");
-            Vote v = voteDAO.getUserVoteForProject(getCurrentUser(), projectDAO.findById(projectId));
+            Project project = projectDAO.findById(projectId);
+            Vote v = voteDAO.getUserVoteForProject(getCurrentUser(), project);
             if (v != null) {
                 v.bind(request.getParameterMap(), validator);
                 voteDAO.update(v);
@@ -50,11 +52,18 @@ public class VoteController extends ApplicationController {
                 v = new Vote();
                 v.bind(request.getParameterMap(), validator);
                 voteDAO.create(v);
-                if (isJson()) {
-                    renderJson(v.getId());
-                } else {
-                    redirect("project", "view");
-                }
+            }
+            List<Vote> votes = voteDAO.findVotesByProject(project);
+            int sum = 0;
+            for (Vote vote : votes) {
+                sum += vote.getValue();
+            }
+            project.setRating(new Float(sum/votes.size()));
+            projectDAO.update(project);
+            if (isJson()) {
+                renderJson(project.getRating().toString());
+            } else {
+                redirect("project", "view");
             }
 
         } catch (SQLException ex) {
