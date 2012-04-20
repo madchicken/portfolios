@@ -25,7 +25,7 @@ public class VoteDAO extends BaseDAO<Vote> {
         Vote.setDao(this);
     }
 
-    public List<Vote> getVotesByProject(Project project) throws SQLException {
+    public List<Vote> findVotesByProject(Project project) throws SQLException {
         return select("select * from vote where project_id =?", project.getId());
     }
 }
