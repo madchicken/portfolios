@@ -47,6 +47,7 @@ public class ProjectDAO extends BaseDAO {
         }
         return null;
     }
+   
     
     public List<Project> findUserProjects(User user) {
         try {
