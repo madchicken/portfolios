@@ -55,7 +55,7 @@
                                 <c:choose>
                                     <c:when test="${not empty user}">
                                         <li><a href="${root}/dashboard"><i class="icon-folder-open"></i> Dashboard</a></li>
-                                        <li><a href="${root}/user/profile"><i class="icon-user"></i> Your profile</a></li>
+                                        <li><a href="${root}/user/profile/${user.id}"><i class="icon-user"></i> Your profile</a></li>
                                         <li class="divider"></li>
                                         <li><a href="${root}/logout/logout"><i class="icon-share"></i> Logout</a></li>
                                     </c:when>

@@ -9,6 +9,8 @@ import it.redoddity.portfolios.dao.UserDAO;
 import it.redoddity.portfolios.model.User;
 import it.redoddity.utils.ServletUtils;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,13 +27,17 @@ public abstract class ApplicationController extends BaseController {
         this.userDAO = userDAO;
     }
 
-    protected User getCurrentUser() throws SQLException {
+    protected User getCurrentUser() {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             Cookie cookie = ServletUtils.getCookieByName(request, "portfolios.userid");
             if (cookie != null) {
-                user = userDAO.findById(cookie.getValue());
+                try {
+                    user = userDAO.findById(cookie.getValue());
+                } catch (SQLException ex) {
+                    Logger.getLogger(ApplicationController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         return user;

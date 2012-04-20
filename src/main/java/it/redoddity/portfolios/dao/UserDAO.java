@@ -34,6 +34,11 @@ public class UserDAO extends BaseDAO<User> {
         List<User> users = findByProperty("email", email);
         return users.size() == 1 ? users.get(0) : null;
     }
+    
+        public User findByNichNamel(String nickName) throws SQLException {
+        List<User> users = findByProperty("nickName", nickName);
+        return users.size() == 1 ? users.get(0) : null;
+    }
 
     public List<User> findCollaboratorsForProject(Project project) throws SQLException {
         return select("select * from user join user_projects on user.id = user_projects.user_id where user_projects.project_id =?", project.getId());        

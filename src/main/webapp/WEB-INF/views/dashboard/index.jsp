@@ -9,9 +9,10 @@
         <div class="page-header">
             <h1>
                 Dashboard
-                <small>Here you'll find your own projects</small>
+                <small>Welcome ${user.nickName}, here you'll find your own projects</small>
                 <a class="btn btn-success" href="${root}/project/newproject"><i class="icon-plus icon-white"></i> Add Project</a>
             </h1>
+            
         </div>
         <c:forEach items="${ownProjects}" var="ownProject">
             <div class="row">
