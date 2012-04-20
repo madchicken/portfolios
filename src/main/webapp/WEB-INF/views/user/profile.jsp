@@ -6,40 +6,26 @@
         <title>Portfolios Registration Page</title>
     </head>
     <body>
-    <div class="container-fluid">
-    <div class="row-fluid">
-    <div class="span2">
-    <!--Sidebar content-->
-    <img src="${theUser.gravatarURL}" title="Avatar"/>
-    </div>
-    <div class="span10">
-    <!--Body content-->
-<h2>${theUser.nickName}'s Profile</h2>
+        <div class="page-header">
+            <h1>
+                <img src="${theUser.gravatarURL}" alt="user avatar">
+                ${theUser.nickName}'s Profile&rarr;
+                <small>${theUser.firstName} ${theUser.lastName}</small>
+            </h1>
 
-        
-
-        
-    <div class="row-fluid">
-        <div class="span4">First name</div>
-        <div class="span8">${theUser.firstName}</div>
-    </div>
-    <div class="row-fluid">
-        <div class="span4">Last name</div>
-        <div class="span8">${theUser.lastName}</div>
-    </div>
-    <div class="row-fluid">
-        <div class="span4">Email</div>
-        <div class="span8">${theUser.email}</div>
-    </div>
+        </div>
+        <strong>Firstname:</strong>
+        <p>${theUser.firstName}</p>
+        <br />
+        <strong>LastName</strong>
+        <p>${theUser.lastName}</p>
+        <br />
+        <strong>Email</strong>
+        <p>${theUser.email}</p>
+        <br />
         <c:if test="${theUser.nickName eq user.nickName}">
-            <a href="${root}/user/edit" class="btn btn-primary">Update your profile </a>
-            
-                
+            <a href="${root}/user/edit" class="btn btn-primary">Update profile</a>
         </c:if>    
-    </div>
-    </div>
-    </div>        
-        
 
     </body>
 </html>

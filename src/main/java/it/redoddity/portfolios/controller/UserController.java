@@ -4,16 +4,13 @@
  */
 package it.redoddity.portfolios.controller;
 
-import it.redoddity.controller.BaseController;
 import it.redoddity.portfolios.dao.UserDAO;
 import it.redoddity.portfolios.model.User;
-import it.redoddity.utils.ServletUtils;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;

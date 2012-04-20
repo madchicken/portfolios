@@ -23,11 +23,24 @@
             <li class="span8">
                 <p>${project.description}</p>
                 <h3>Rating: </h3><h1>4.0</h1>
-                <c:forEach items="${project.getCollaborators()}" var="collaborator">
-                    ${collaborator.nickName}
-                </c:forEach>
             </li>
         </ul>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Avatar</th>
+                    <th>Nickname</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${project.getCollaborators()}" var="collaborator">
+                    <tr>
+                        <td style="width: 60px;"><img src="${collaborator.gravatarURL}" alt="user thumbnail" /></td>
+                        <td>${collaborator.nickName}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
         <a class="btn" href="${root}/dashboard">&larr; Go Back</a>
     </body>
 </html>

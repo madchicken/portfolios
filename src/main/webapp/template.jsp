@@ -41,7 +41,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#">What I do</a>
+                <a class="brand" href="${root}/">What I do</a>
                 <div class="nav-collapse">
                     <ul class="nav">
                         <li class="active"><a href="${root}/">Home</a></li>

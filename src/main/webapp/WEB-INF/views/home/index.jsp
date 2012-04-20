@@ -28,9 +28,9 @@
             <c:if test="${not empty lastProjects}">
                 <c:forEach items="${lastProjects}" var="project">
                     <div class="span10">
-                        <h2>${project.name} by ${project.leader.email}</h2>
+                        <h2><a href="${root}/project/view/${project.id}">${project.name} by ${project.leader.email}</a></h2>
                         <p>${project.description}</p>
-                        <p><a class="btn" href="#">View details »</a></p>
+                        <p><a class="btn" href="${root}/project/view/${project.id}">View details &rarr;</a></p>
                     </div>
                 </c:forEach>
             </c:if>

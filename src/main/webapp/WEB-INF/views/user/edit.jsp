@@ -37,6 +37,7 @@
             </label>
             <input type="hidden" name="nickName" value="${user.nickName}"/>
             <button type="submit" class="btn btn-primary">Update</button>
+            <a href="${root}/user/profile/${user.id}" class="btn">Cancel</a>
         </form>
 
     </body>
