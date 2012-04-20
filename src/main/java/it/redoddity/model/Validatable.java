@@ -23,7 +23,7 @@ public abstract class Validatable extends Model {
     }
     
     public void addError(String err) {
-        getDataBinder().getBindingResult().addError(new ObjectError(this.getClass().getSimpleName(), err));
+        getDataBinder().getBindingResult().addError(new FieldError(this.getClass().getSimpleName(), "", err));
     }
 
     public void addError(String field, String err) {

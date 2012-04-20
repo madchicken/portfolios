@@ -40,14 +40,8 @@ public class ProjectDAO extends BaseDAO {
     
     public List<Project> findAll() {
         try {
-            List<Map<String, Object>> projects = select("select * from Project");
-            List<Project> list = new ArrayList<>();
-            for (int i = 0; i < list.size(); i++) {
-                Map<String, Object> obj = projects.get(i);
-                Project project = new Project(obj);
-                list.add(project);
-            }
-            return list;
+            List<Map<String, Object>> projects = select("select * from project");
+            resultToProjectList(projects);
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,13 +51,7 @@ public class ProjectDAO extends BaseDAO {
     public List<Project> findUserProjects(User user) {
         try {
             List<Map<String, Object>> projects = select("SELECT p.* FROM project p JOIN user_projects up ON (up.user_id = ?)", user.getId());
-            List<Project> list = new ArrayList<>();
-            for (int i = 0; i < projects.size(); i++) {
-                Map<String, Object> obj = projects.get(i);
-                Project project = new Project(obj);
-                list.add(project);
-            }
-            return list;
+            return resultToProjectList(projects);
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,13 +61,7 @@ public class ProjectDAO extends BaseDAO {
     public List<Project> findLastProjects(int from,int to){
         try {
             List<Map<String, Object>> projects = select("select * from project order by updatedAt desc limit "+from+","+to);
-            List<Project> list = new ArrayList<>();
-            for (int i = 0; i < projects.size(); i++) {
-                Map<String, Object> obj = projects.get(i);
-                Project project = new Project(obj);
-                list.add(project);
-            }
-            return list;
+            return resultToProjectList(projects);
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -117,5 +99,29 @@ public class ProjectDAO extends BaseDAO {
     
     public User findLeaderById(String leaderId) {
         return userDAO.findById(leaderId);
+    }
+    
+    public Project findByName(String name) {
+        try {
+            List<Map<String, Object>> projects = select("select * from project where name = ?", name);
+            return projects.size() == 1 ? resultToProjectList(projects).get(0) : null;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public boolean exists(Project project) {
+        return findByName(project.getName()) != null;
+    }
+
+    private List<Project> resultToProjectList(List<Map<String, Object>> projects) {
+        List<Project> list = new ArrayList<>();
+        for (int i = 0; i < projects.size(); i++) {
+            Map<String, Object> obj = projects.get(i);
+            Project project = new Project(obj);
+            list.add(project);
+        }
+        return list;
     }
 }
