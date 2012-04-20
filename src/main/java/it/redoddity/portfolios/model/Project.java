@@ -28,6 +28,7 @@ public class Project extends Validatable {
         return dao;
     }
     
+    @NotBlank
     private String name;
     @NotBlank
     private String description;

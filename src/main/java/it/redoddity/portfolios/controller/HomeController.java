@@ -44,7 +44,9 @@ public class HomeController extends ApplicationController {
         }
                 
         List<Project> projects =  projectDAO.findLastProjects(from, to);
+        int projectsSize = projects.size();
         request.setAttribute("lastProjects", projects);
+        request.setAttribute("lastProjectsSize", projectsSize);
         request.setAttribute("from", from);
         render();
         

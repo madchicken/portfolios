@@ -37,13 +37,22 @@ public class ProjectController extends ApplicationController{
         User user = getCurrentUser();
         Project project = new Project(user);
         project.bind(request.getParameterMap(), validator);
-        if (project.isValid()) {
-            projectDAO.create(project);
-            redirect("dashboard");
+        if(!projectDAO.exists(project)) {
+            if (project.isValid()) {
+                projectDAO.create(project);
+                redirect("dashboard");
+                return;
+            }
         } else {
-            request.setAttribute("project", project);
-            render("new");
+            project.addError("A project with the same name already exists!");
         }
+        request.setAttribute("project", project);
+        render("new");
     }
     
+    public void view() throws ServletException, IOException {
+        String projectId = (String) request.getAttribute("id");
+        request.setAttribute("project", projectDAO.findById(projectId));
+        render("view");
+    }
 }
